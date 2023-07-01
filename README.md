@@ -19,9 +19,10 @@ git clone https://github.com/Green-Wood/BTTR
 
 # install project   
 cd BTTR
-conda create -y -n bttr python=3.7
+conda create -y -n bttr python=3.9
 conda activate bttr
-conda install --yes -c pytorch pytorch=1.7.0 torchvision cudatoolkit=<your-cuda-version>
+conda install --yes -c pytorch pytorch=2.0.1 torchvision=0.15.2
+# conda install --yes -c pytorch pytorch=2.0.1 torchvision cudatoolkit=<your-cuda-version>
 pip install -e .   
  ```   
  Next, navigate to any file and run it. It may take **6~7** hours to coverage on **4** gpus using ddp.
@@ -35,7 +36,7 @@ python train.py --config config.yaml
 
 For single gpu user, you may change the `config.yaml` file to
 ```yaml
-gpus: 1
+# gpus: 1
 # gpus: 4
 # accelerator: ddp
 ```

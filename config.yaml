@@ -1,6 +1,6 @@
 seed_everything: 7
 trainer:
-  checkpoint_callback: true
+  enable_checkpointing: true
   callbacks:
     - class_path: pytorch_lightning.callbacks.LearningRateMonitor
       init_args:
@@ -12,8 +12,8 @@ trainer:
         mode: max
         filename: '{epoch}-{step}-{val_ExpRate:.4f}'
   # gpus: 1
-  gpus: 4
-  accelerator: ddp
+  # gpus: 4
+  accelerator: mps
   check_val_every_n_epoch: 2
   max_epochs: 300
 model:
@@ -31,6 +31,6 @@ model:
   patience: 20
 data:
   zipfile_path: data.zip
-  test_year: 2014
+  test_year: "2014"
   batch_size: 8
   num_workers: 5
