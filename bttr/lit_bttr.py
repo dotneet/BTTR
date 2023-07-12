@@ -102,7 +102,7 @@ class LitBTTR(pl.LightningModule):
         out_hat = self(batch.imgs, batch.mask, tgt)
 
         loss = ce_loss(out_hat, out)
-        self.log("train_loss", loss, on_step=False, on_epoch=True, sync_dist=True)
+        self.log("train_loss", loss, on_step=False, on_epoch=True, sync_dist=True, batch_size=len(batch))
 
         return loss
 
@@ -118,6 +118,7 @@ class LitBTTR(pl.LightningModule):
             on_epoch=True,
             prog_bar=True,
             sync_dist=True,
+            batch_size=len(batch),
         )
 
         hyps = self.bttr.beam_search(
@@ -132,6 +133,7 @@ class LitBTTR(pl.LightningModule):
             prog_bar=True,
             on_step=False,
             on_epoch=True,
+            batch_size=len(batch),
         )
 
     def test_step(self, batch: Batch, _):
